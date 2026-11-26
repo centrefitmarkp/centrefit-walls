@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Centrefit LED Video Wall · Distributor Calculator</title><style>
+:root{--navy:#0b1d3a;--navy2:#102a52;--cyan:#19c2ff;--cyan2:#0aa3dc;--white:#fff;--muted:#b9c7dc;--ok:#2ee07a;--warn:#ffb020;--bad:#ff4d5e;--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--navy);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.4}
+header{display:flex;align-items:center;gap:14px;padding:14px 22px;background:var(--navy2);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header h1{font-size:20px;margin:0;font-weight:800}
+header .sub{color:var(--muted);font-size:13px}
+.badge{margin-left:auto;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;padding:6px 10px;border-radius:999px;background:rgba(25,194,255,.15);color:var(--cyan);border:1px solid rgba(25,194,255,.4)}
+.badge.int{background:rgba(255,77,94,.15);color:var(--bad);border-color:rgba(255,77,94,.5);margin-left:8px}
+main{display:grid;grid-template-columns:1fr 440px;gap:18px;padding:18px 22px;max-width:1540px;margin:0 auto}
+@media(max-width:1100px){main{grid-template-columns:1fr}}
+.card{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:18px}
+.card h2{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin:0 0 12px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px}
+.stat{background:var(--navy);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat span{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat b{font-size:22px}
+.seg{display:inline-flex;border:2px solid rgba(255,255,255,.25);border-radius:12px;overflow:hidden;margin-bottom:12px}
+.seg button{background:transparent;color:#fff;border:0;padding:10px 16px;font-weight:700;font-size:15px;cursor:pointer}
+.seg button.on{background:var(--cyan);color:#04121f}
+.gridwrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--navy);padding:10px}
+#grid{display:grid;grid-template-columns:repeat(20,30px);gap:3px;width:max-content;user-select:none;touch-action:none}
+.cell{width:30px;height:30px;border-radius:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);cursor:crosshair}
+.cell.on{background:var(--cyan);border-color:var(--cyan2)}
+.cell.pv{background:rgba(25,194,255,.35)}
+.hint{font-size:13px;color:var(--muted);margin:8px 0 0}
+.row{display:grid;grid-template-columns:1fr 150px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.row label{font-size:15px}
+.row small{display:block;color:var(--muted);font-size:12px}
+input,select{width:100%;padding:9px 10px;border-radius:10px;border:2px solid rgba(255,255,255,.22);background:var(--navy);color:#fff;font-size:15px;text-align:right}
+select{text-align:left}
+select option{background:#0b1d3a;color:#fff}
+select{color-scheme:dark}
+input:focus,select:focus{outline:none;border-color:var(--cyan)}
+.sum .line{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:15px}
+.sum .line.sub{color:var(--muted);font-size:14px}
+.sum .line.big{font-size:18px;font-weight:800;border-bottom:0}
+.sum .line.big.total{color:var(--cyan);font-size:24px}
+.sum .grp{margin-top:14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.qty{display:inline-block;min-width:26px;text-align:center;font-size:11px;font-weight:800;padding:2px 6px;border-radius:999px;background:rgba(25,194,255,.15);color:var(--cyan);margin-left:6px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 6px;border-bottom:1px solid var(--line)}
+td{padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+td input{padding:6px 8px;font-size:14px}
+.num{text-align:right}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:10px 16px;font-size:15px;font-weight:700;background:var(--cyan);color:#04121f;cursor:pointer}
+.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3)}
+.btn.sm{padding:6px 10px;font-size:13px;border-radius:9px}
+.btn.danger{background:transparent;color:var(--bad);border:2px solid rgba(255,77,94,.5)}
+.actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.06em;padding:2px 7px;border-radius:999px}
+.tag.m2{background:rgba(46,224,122,.15);color:var(--ok)}
+.tag.cab{background:rgba(25,194,255,.15);color:var(--cyan)}
+.tag.mod{background:rgba(255,176,32,.15);color:var(--warn)}
+.tag.sys{background:rgba(255,255,255,.12);color:#fff}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+#saved li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+#saved{list-style:none;margin:8px 0 0;padding:0}
+.add{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:8px;margin-top:10px}
+.add input,.add select{text-align:left}
+@media print{
+  body{background:#fff;color:#000}
+  header,.noprint,.gridwrap,.seg,.hint,.actions,#invcard,#extracard,#savecard,#ratecard{display:none!important}
+  main{display:block;padding:0}
+  .card{background:#fff;color:#000;border:1px solid #ccc;break-inside:avoid}
+  .card h2,.sum .line.big.total{color:#0b1d3a}
+  .stat,.stat b,.sum .line{color:#000}.stat span,.sum .line.sub,.sum .grp{color:#555}
+  .qty{background:#eee;color:#000}
+  #printhead{display:block!important}
+}
+#printhead{display:none;padding:18px 0 8px;border-bottom:2px solid #0b1d3a;margin-bottom:12px}
+#printhead h1{margin:0;font-size:22px;color:#0b1d3a}
+#printhead p{margin:4px 0 0;font-size:13px;color:#333}
+</style></head><body>
+<header><div><h1>LED Video Wall Calculator</h1><div class="sub">Centrefit Group · P1.9 500 × 500 mm cabinets · draw the wall, read your price</div></div><div class="badge">Centrefit distributor prices 26/11/2026 · valid to 26 Dec 2026</div></header>
+<main><div>
+<div id="printhead"><h1>LED Video Wall Quotation</h1><p id="printmeta"></p></div>
+<div class="card"><h2>Wall designer</h2>
+<div class="seg" id="series"><button data-s="s40" class="on">S40 · S1.9 (GOB)</button><button data-s="aeris">Aeris · A1.9 (GOB)</button></div>
+<div class="stats"><div class="stat"><span>Width</span><b id="stW">0 m</b></div><div class="stat"><span>Height</span><b id="stH">0 m</b></div><div class="stat"><span>Cabinets</span><b id="stN">0</b></div><div class="stat"><span>Area</span><b id="stA">0 m²</b></div><div class="stat"><span>Resolution</span><b id="stR">0 × 0</b></div></div>
+<div class="gridwrap"><div id="grid"></div></div>
+<p class="hint">Drag to draw a rectangle (up to 10 m × 6 m). Shift‑click a cell to add or remove it for L‑shapes and columns. Each cell is one 500 × 500 mm cabinet of four 250 × 250 mm modules, 256 × 256 pixels (P1.9).</p>
+<div class="actions noprint"><button class="btn ghost" onclick="clearGrid()">Clear</button></div></div>
+<div class="card"><h2>What's included</h2><p class="note" style="margin:0">Your price from Centrefit covers the LED cabinets, power supplies, receiving cards, spare modules, the controller matched to the wall's pixel count, and delivery into Centrefit's Brisbane warehouse. It excludes GST, delivery to site, mounting structure and installation, which you add below. Irregular cabinet shapes, outdoor walls and walls above 13 million pixels are quoted on request.</p></div>
+</div><div>
+<div class="card"><h2>Your inputs</h2>
+<div class="row"><label>Spare modules<small>% of modules, rounded up</small></label><input id="spares" type="number" step="0.5" value="3"></div>
+<div class="row"><label>Controller<small>auto picks the smallest that fits</small></label><select id="ctrl"></select></div>
+<div class="row"><label>Delivery to site (AUD)</label><input id="fLoc" type="number" step="1" value="0"></div>
+<div class="row"><label>Mounting and install, per cabinet (AUD)</label><input id="instRate" type="number" step="1" value="0"></div>
+<div class="row"><label>Your margin<small>% on your total cost</small></label><input id="margin" type="number" step="1" value="25"></div></div>
+<div class="card sum"><h2>Quote summary</h2><div id="sum"></div></div>
+<div class="card" id="savecard"><h2>Saved quotes</h2><div class="row" style="grid-template-columns:1fr auto"><input id="qName" placeholder="Client / site name" style="text-align:left"><button class="btn" onclick="saveQuote()">Save</button></div><ul id="saved"></ul><div class="actions"><button class="btn ghost" onclick="window.print()">Print / PDF</button></div></div>
+</div></main>
+<script>
+const R={"generated":"26/11/2026","generatedISO":"2026-11-26T03:21:35.174Z","valid":"26 Dec 2026","distMargin":25,"series":{"s40":{"series":"s40","label":"S40 · S1.9 (GOB)","m2":2410,"spare":118,"spareName":"Spare module 250 × 250 mm","cab":219,"ctrl":[{"m":"TB10plus","max":650000,"d":"Multimedia player, asynchronous, 1 Ethernet port","aud":208},{"m":"TB20plus","max":650000,"d":"Multimedia player, async + sync, 1 Ethernet port","aud":264},{"m":"TB50","max":1300000,"d":"Multimedia player, async + sync, 2 Ethernet ports","aud":617},{"m":"TB60","max":2300000,"d":"Multimedia player, async + sync, 4 Ethernet ports","aud":774},{"m":"VX400pro","max":2600000,"d":"Video processor, 4 Ethernet ports","aud":1930},{"m":"VX600pro","max":3900000,"d":"Video processor, 6 Ethernet ports","aud":2057},{"m":"VX1000pro","max":6500000,"d":"Video processor, 10 Ethernet ports","aud":2939},{"m":"VX2000pro","max":13000000,"d":"Video processor, 20 Ethernet ports","aud":5632}]},"aeris":{"series":"aeris","label":"Aeris · A1.9 (GOB)","m2":2625,"spare":216,"spareName":"Spare module 250 × 500 mm (regular)","cab":219,"ctrl":[{"m":"TB10plus","max":650000,"d":"Multimedia player, asynchronous, 1 Ethernet port","aud":208},{"m":"TB20plus","max":650000,"d":"Multimedia player, async + sync, 1 Ethernet port","aud":264},{"m":"TB50","max":1300000,"d":"Multimedia player, async + sync, 2 Ethernet ports","aud":617},{"m":"TB60","max":2300000,"d":"Multimedia player, async + sync, 4 Ethernet ports","aud":774},{"m":"VX400pro","max":2600000,"d":"Video processor, 4 Ethernet ports","aud":1930},{"m":"VX600pro","max":3900000,"d":"Video processor, 6 Ethernet ports","aud":2057},{"m":"VX1000pro","max":6500000,"d":"Video processor, 10 Ethernet ports","aud":2939},{"m":"VX2000pro","max":13000000,"d":"Video processor, 20 Ethernet ports","aud":5632}]}}};const PX=65536,COLS=20,ROWS=12;
+fetch('rates.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(!j||!j.series)return;Object.assign(R,j);document.querySelector('.badge').textContent='Centrefit distributor prices '+R.generated+' · valid to '+R.valid;const keep=ctrlSel.value;ctrlSel.innerHTML='<option value="auto">Auto (smallest that fits)</option>'+R.series.s40.ctrl.map(c=>'<option value="'+c.m+'">'+c.m+' · up to '+(c.max/1e6).toFixed(c.max<1e6?2:1)+' M px</option>').join('');ctrlSel.value=keep;if(!document.getElementById('margin').dataset.touched)document.getElementById('margin').value=R.distMargin;calc()}).catch(()=>{});
+const LS=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};const SV=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let series=LS('vwd-series')||'s40',cells=new Set(LS('vwd-cells')||[]);
+const grid=document.getElementById('grid');for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){const d=document.createElement('div');d.className='cell';d.dataset.i=r*COLS+c;grid.appendChild(d)}
+let drag=null;const idx=e=>{const t=document.elementFromPoint(e.clientX,e.clientY);return t&&t.classList.contains('cell')?+t.dataset.i:null};
+grid.addEventListener('pointerdown',e=>{const i=idx(e);if(i===null)return;if(e.shiftKey){cells.has(i)?cells.delete(i):cells.add(i);paint();return}drag={a:i,b:i};preview()});
+grid.addEventListener('pointermove',e=>{if(!drag)return;const i=idx(e);if(i===null||i===drag.b)return;drag.b=i;preview()});
+window.addEventListener('pointerup',()=>{if(!drag)return;cells=new Set(rect(drag.a,drag.b));drag=null;paint()});
+function rect(a,b){const r1=Math.floor(a/COLS),c1=a%COLS,r2=Math.floor(b/COLS),c2=b%COLS;const o=[];for(let r=Math.min(r1,r2);r<=Math.max(r1,r2);r++)for(let c=Math.min(c1,c2);c<=Math.max(c1,c2);c++)o.push(r*COLS+c);return o}
+function preview(){const s=new Set(rect(drag.a,drag.b));grid.querySelectorAll('.cell').forEach(d=>d.classList.toggle('pv',s.has(+d.dataset.i)))}
+function paint(){grid.querySelectorAll('.cell').forEach(d=>{d.classList.remove('pv');d.classList.toggle('on',cells.has(+d.dataset.i))});SV('vwd-cells',[...cells]);calc()}
+function clearGrid(){cells=new Set();paint()}
+function bbox(){if(!cells.size)return{w:0,h:0};let r1=99,r2=-1,c1=99,c2=-1;cells.forEach(i=>{const r=Math.floor(i/COLS),c=i%COLS;r1=Math.min(r1,r);r2=Math.max(r2,r);c1=Math.min(c1,c);c2=Math.max(c2,c)});return{w:c2-c1+1,h:r2-r1+1}}
+document.querySelectorAll('#series button').forEach(b=>{b.classList.toggle('on',b.dataset.s===series);b.addEventListener('click',()=>{series=b.dataset.s;SV('vwd-series',series);document.querySelectorAll('#series button').forEach(x=>x.classList.toggle('on',x===b));calc()})});
+const ctrlSel=document.getElementById('ctrl');ctrlSel.innerHTML='<option value="auto">Auto (smallest that fits)</option>'+R.series.s40.ctrl.map(c=>'<option value="'+c.m+'">'+c.m+' · up to '+(c.max/1e6).toFixed(c.max<1e6?2:1)+' M px</option>').join('');
+['spares','ctrl','fLoc','instRate','margin','qName'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('input',()=>{el.dataset.touched=1;calc()});el.addEventListener('change',calc)});
+const aud=n=>'$'+Math.round(n).toLocaleString('en-AU');const v=id=>+document.getElementById(id).value||0;
+function calc(){const S=R.series[series],N=cells.size,bb=bbox(),area=N*0.25,mods=N*4,px=N*PX;
+stW.textContent=(bb.w*0.5).toFixed(1)+' m';stH.textContent=(bb.h*0.5).toFixed(1)+' m';stN.textContent=N;stA.textContent=area.toFixed(2)+' m²';stR.textContent=(bb.w*256)+' × '+(bb.h*256);
+const f=ctrlSel.value;let c=f==='auto'?S.ctrl.find(c=>c.max>=px):S.ctrl.find(c=>c.m===f);const fits=c?c.max>=px:false;if(!c)c={m:'On request',aud:0,d:'Above 13 M pixels, ask Centrefit'};
+const spareQty=Math.ceil(mods*v('spares')/100);
+const L=[{n:'LED screen P1.9',q:area.toFixed(2)+' m²',a:area*S.m2},{n:'Cabinet electronics and freight',q:N,a:N*S.cab},{n:S.spareName,q:spareQty,a:spareQty*S.spare},{n:'Controller '+c.m,q:1,a:c.aud,d:c.d+(fits?'':' · too small for this wall')}];
+const buy=L.reduce((a,l)=>a+l.a,0),inst=N*v('instRate'),cost=buy+v('fLoc')+inst,sell=cost*(1+v('margin')/100);
+const h=['<div class="grp">Your price from Centrefit · AUD ex GST</div>'];L.forEach(l=>h.push('<div class="line sub"><span>'+l.n+'<span class="qty">'+l.q+'</span>'+(l.d?'<br><span style="font-size:12px">'+l.d+'</span>':'')+'</span><span>'+aud(l.a)+'</span></div>'));
+h.push('<div class="line big"><span>Your buy price ex GST</span><span>'+aud(buy)+'</span></div>');
+h.push('<div class="grp">Your costs</div><div class="line sub"><span>Delivery to site</span><span>'+aud(v('fLoc'))+'</span></div><div class="line sub"><span>Mounting and install<span class="qty">'+N+'</span></span><span>'+aud(inst)+'</span></div><div class="line"><span>Your total cost</span><b>'+aud(cost)+'</b></div>');
+h.push('<div class="line sub"><span>Your margin '+v('margin')+'%</span><span>'+aud(sell-cost)+'</span></div><div class="line big"><span>Sell price ex GST</span><span>'+aud(sell)+'</span></div><div class="line sub"><span>GST 10%</span><span>'+aud(sell*0.1)+'</span></div><div class="line big total"><span>Sell price inc GST</span><span>'+aud(sell*1.1)+'</span></div><div class="line sub"><span>Per m² ex GST</span><span>'+(area?aud(sell/area):'–')+'</span></div>');
+if(!fits&&N)h.push('<div class="line sub" style="color:var(--bad)"><span>Chosen controller does not support '+px.toLocaleString()+' pixels</span></div>');
+document.getElementById('sum').innerHTML=h.join('');document.getElementById('printmeta').textContent=(document.getElementById('qName').value||'Draft')+' · '+(series==='s40'?'S40 S1.9':'Aeris A1.9')+' · '+(bb.w*0.5).toFixed(1)+' × '+(bb.h*0.5).toFixed(1)+' m · '+N+' cabinets · '+new Date().toLocaleDateString('en-AU')+' · Centrefit prices valid to '+R.valid}
+function saveQuote(){const n=document.getElementById('qName').value.trim();if(!n){alert('Give the quote a name first.');return}const all=LS('vwd-quotes')||{};all[n]={cells:[...cells],series,spares:v('spares'),ctrl:ctrlSel.value,fLoc:v('fLoc'),instRate:v('instRate'),margin:v('margin'),when:new Date().toISOString()};SV('vwd-quotes',all);renderSaved()}
+function renderSaved(){const all=LS('vwd-quotes')||{};document.getElementById('saved').innerHTML=Object.entries(all).sort((a,b)=>b[1].when.localeCompare(a[1].when)).map(([n,q])=>'<li><span><b>'+n+'</b><br><span style="color:var(--muted);font-size:12px">'+new Date(q.when).toLocaleString('en-AU')+' · '+q.cells.length+' cabinets</span></span><span><button class="btn sm ghost" data-load="'+n+'">Load</button> <button class="btn sm danger" data-x="'+n+'">Delete</button></span></li>').join('')||'<li style="color:var(--muted)">Nothing saved yet.</li>';
+document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{const q=(LS('vwd-quotes')||{})[b.dataset.load];cells=new Set(q.cells);series=q.series;['spares','fLoc','instRate','margin'].forEach(k=>document.getElementById(k).value=q[k]);ctrlSel.value=q.ctrl;document.getElementById('qName').value=b.dataset.load;document.querySelectorAll('#series button').forEach(x=>x.classList.toggle('on',x.dataset.s===series));paint()});
+document.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{if(!confirm('Delete saved quote "'+b.dataset.x+'"?'))return;const all=LS('vwd-quotes')||{};delete all[b.dataset.x];SV('vwd-quotes',all);renderSaved()})}
+renderSaved();paint();
+</script></body></html>
