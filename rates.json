@@ -1,6 +1,6 @@
 {
  "generated": "26/11/2026",
- "generatedISO": "2026-11-26T13:23:38+10:00",
+ "generatedISO": "2026-11-26T13:25:04+10:00",
  "valid": "26 Dec 2026",
  "distMargin": 25,
  "series": {
@@ -120,6 +120,5 @@
     }
    ]
   }
- },
- "note": "publish path test"
+ }
 }
