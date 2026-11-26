@@ -1,6 +1,6 @@
 {
  "generated": "27/11/2026",
- "generatedISO": "2026-11-26T19:06:15.446Z",
+ "generatedISO": "2026-11-26T21:48:04.774Z",
  "valid": "26 Dec 2026",
  "distMargin": 30,
  "series": {
@@ -10,7 +10,8 @@
    "m2": 2780,
    "spare": 136,
    "spareName": "Spare module 250 × 250 mm",
-   "cab": 135,
+   "cab": 90,
+   "order": 975,
    "psu": 50,
    "rx": 68,
    "ctrl": [
@@ -78,7 +79,8 @@
    "m2": 3029,
    "spare": 249,
    "spareName": "Spare module 250 × 500 mm (regular)",
-   "cab": 135,
+   "cab": 90,
+   "order": 975,
    "psu": 50,
    "rx": 68,
    "ctrl": [
