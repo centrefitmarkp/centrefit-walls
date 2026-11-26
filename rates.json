@@ -1,15 +1,15 @@
 {
  "generated": "26/11/2026",
- "generatedISO": "2026-11-26T03:21:35.175Z",
+ "generatedISO": "2026-11-26T13:23:38+10:00",
  "valid": "26 Dec 2026",
  "distMargin": 25,
  "series": {
   "s40": {
    "series": "s40",
-   "label": "S40 · S1.9 (GOB)",
+   "label": "S40 \u00b7 S1.9 (GOB)",
    "m2": 2410,
    "spare": 118,
-   "spareName": "Spare module 250 × 250 mm",
+   "spareName": "Spare module 250 \u00d7 250 mm",
    "cab": 219,
    "ctrl": [
     {
@@ -64,10 +64,10 @@
   },
   "aeris": {
    "series": "aeris",
-   "label": "Aeris · A1.9 (GOB)",
+   "label": "Aeris \u00b7 A1.9 (GOB)",
    "m2": 2625,
    "spare": 216,
-   "spareName": "Spare module 250 × 500 mm (regular)",
+   "spareName": "Spare module 250 \u00d7 500 mm (regular)",
    "cab": 219,
    "ctrl": [
     {
@@ -120,5 +120,6 @@
     }
    ]
   }
- }
+ },
+ "note": "publish path test"
 }
