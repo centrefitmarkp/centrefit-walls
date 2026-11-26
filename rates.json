@@ -1,6 +1,6 @@
 {
  "generated": "26/11/2026",
- "generatedISO": "2026-11-26T04:37:32.224Z",
+ "generatedISO": "2026-11-26T08:29:05.556Z",
  "valid": "26 Dec 2026",
  "distMargin": 30,
  "series": {
@@ -11,51 +11,61 @@
    "spare": 136,
    "spareName": "Spare module 250 × 250 mm",
    "cab": 253,
+   "psu": 50,
+   "rx": 68,
    "ctrl": [
     {
      "m": "TB10plus",
+     "ports": 1,
      "max": 650000,
      "d": "Multimedia player, asynchronous, 1 Ethernet port",
      "aud": 240
     },
     {
      "m": "TB20plus",
+     "ports": 1,
      "max": 650000,
      "d": "Multimedia player, async + sync, 1 Ethernet port",
      "aud": 305
     },
     {
      "m": "TB50",
+     "ports": 2,
      "max": 1300000,
      "d": "Multimedia player, async + sync, 2 Ethernet ports",
      "aud": 712
     },
     {
      "m": "TB60",
+     "ports": 4,
      "max": 2300000,
      "d": "Multimedia player, async + sync, 4 Ethernet ports",
      "aud": 893
     },
     {
      "m": "VX400pro",
+     "ports": 4,
      "max": 2600000,
      "d": "Video processor, 4 Ethernet ports",
      "aud": 2227
     },
     {
      "m": "VX600pro",
+     "ports": 6,
      "max": 3900000,
      "d": "Video processor, 6 Ethernet ports",
      "aud": 2374
     },
     {
      "m": "VX1000pro",
+     "ports": 10,
      "max": 6500000,
      "d": "Video processor, 10 Ethernet ports",
      "aud": 3391
     },
     {
      "m": "VX2000pro",
+     "ports": 20,
      "max": 13000000,
      "d": "Video processor, 20 Ethernet ports",
      "aud": 6499
@@ -69,51 +79,61 @@
    "spare": 249,
    "spareName": "Spare module 250 × 500 mm (regular)",
    "cab": 253,
+   "psu": 50,
+   "rx": 68,
    "ctrl": [
     {
      "m": "TB10plus",
+     "ports": 1,
      "max": 650000,
      "d": "Multimedia player, asynchronous, 1 Ethernet port",
      "aud": 240
     },
     {
      "m": "TB20plus",
+     "ports": 1,
      "max": 650000,
      "d": "Multimedia player, async + sync, 1 Ethernet port",
      "aud": 305
     },
     {
      "m": "TB50",
+     "ports": 2,
      "max": 1300000,
      "d": "Multimedia player, async + sync, 2 Ethernet ports",
      "aud": 712
     },
     {
      "m": "TB60",
+     "ports": 4,
      "max": 2300000,
      "d": "Multimedia player, async + sync, 4 Ethernet ports",
      "aud": 893
     },
     {
      "m": "VX400pro",
+     "ports": 4,
      "max": 2600000,
      "d": "Video processor, 4 Ethernet ports",
      "aud": 2227
     },
     {
      "m": "VX600pro",
+     "ports": 6,
      "max": 3900000,
      "d": "Video processor, 6 Ethernet ports",
      "aud": 2374
     },
     {
      "m": "VX1000pro",
+     "ports": 10,
      "max": 6500000,
      "d": "Video processor, 10 Ethernet ports",
      "aud": 3391
     },
     {
      "m": "VX2000pro",
+     "ports": 20,
      "max": 13000000,
      "d": "Video processor, 20 Ethernet ports",
      "aud": 6499
