@@ -166,7 +166,7 @@ const aud=n=>'$'+Math.round(n).toLocaleString('en-AU');const v=id=>+document.get
 function calc(){const S=R.series[series],N=cells.size,bb=bbox(),area=N*0.25,mods=N*4,px=N*PX;
 stW.textContent=(bb.w*0.5).toFixed(1)+' m';stH.textContent=(bb.h*0.5).toFixed(1)+' m';stN.textContent=N;stA.textContent=area.toFixed(2)+' m²';stR.textContent=(bb.w*256)+' × '+(bb.h*256);
 const f=ctrlSel.value;const ok=c=>c.max>=px&&(c.ports||1)*650000>=px;let c=f==='auto'?S.ctrl.find(ok):S.ctrl.find(c=>c.m===f);const fits=c?ok(c):false;if(!c)c={m:'On request',aud:0,d:'Above 13 M pixels, ask Centrefit'};
-const pct=v('spares'),free=x=>Math.floor(x/100),tgt=(x,min)=>Math.max(min,Math.ceil(x*pct/100));const spareQty=Math.max(0,tgt(mods,3)-free(mods)),psuQ=Math.max(0,tgt(N,1)-free(N));
+const pct=v('spares'),free=x=>x>=100?Math.floor(x/100):0,tgt=(x,min)=>Math.max(min,Math.ceil(x*pct/100));const spareQty=Math.max(0,tgt(mods,3)-free(mods)),psuQ=Math.max(0,tgt(N,1)-free(N));
 const L=[{n:'LED screen P1.9',q:area.toFixed(2)+' m²',a:area*S.m2},{n:'Freight and handling',q:N,a:N*S.cab},{n:'Freight and handling, per order',q:1,a:N?(S.order||0):0},{n:'Spare modules',q:spareQty,a:spareQty*S.spare},{n:'Spare power supplies',q:psuQ,a:psuQ*(S.psu||0)},{n:'Spare receiving cards',q:psuQ,a:psuQ*(S.rx||0)},{n:'Controller '+c.m,q:1,a:c.aud,d:c.d+(fits?'':' · too small for this wall')}];
 const buy=L.reduce((a,l)=>a+l.a,0),inst=N*v('instRate'),cost=buy+v('fLoc')+inst,sell=cost*(1+v('margin')/100);
 const h=['<div class="grp">Your price from Centrefit · AUD ex GST</div>'];L.forEach(l=>h.push('<div class="line sub"><span>'+l.n+'<span class="qty">'+l.q+'</span>'+(l.d?'<br><span style="font-size:12px">'+l.d+'</span>':'')+'</span><span>'+aud(l.a)+'</span></div>'));
